@@ -1,0 +1,43 @@
+<% include ../partials/header %>
+<div class="container">
+  <div class="row">
+<h1><%= title %></h1>
+<table id="todos-table" class="table table-bordered">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>title</th>
+    <th>completed</th>
+  </tr>
+  </thead>
+  <tbody>
+</tbody>
+</table>
+<div class="row">
+<% include form %>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+  $.ajax({
+  method: "GET",
+  url: "/api/todos",
+  dataType: "json"
+  })
+  .done(function(data) {
+    buildTable(data)
+  });
+
+  function buildTable(data){
+    let html=""
+    for(let i = 0; i < data.length; i++){
+      html += `<tr>`
+      html += `<td>${data[i].id}</td>`
+      html += `<td>${data[i].title}</td>`
+      html += `<td>${data[i].completed}</td>`
+      html += `</tr>`
+    }
+    $("#todos-table tbody").html(html)
+  }
+</script>
+<% include ../partials/footer %>

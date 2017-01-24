@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+<div class="container">
+  <div class="row">
+<h1><%= title %></h1>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>title</th>
+    <th>completed</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for(var i=0; i<tododata.length; i++) {%>
+  <tr>
+    <td><%= tododata[i].id %></td>
+    <td><%= tododata[i].title %></td>
+    <td><%= tododata[i].completed %></td>
+  </tr>
+  <% } %>
+</tbody>
+</table>
+<div class="row">
+<% include form %>
+</div>
+
+</div>
+</div>
+<% include ../partials/footer %>

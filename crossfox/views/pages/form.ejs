@@ -1,0 +1,33 @@
+<form id="todo-form" action="" method="post">
+  <div class="form-group">
+    <label for="exampleInputEmail1">title</label>
+    <input type="text" class="form-control" name="title" placeholder="Title"/>
+  </div>
+  <button type="submit" class="btn btn-success">save</button>
+</form>
+<script type="text/javascript">
+  $("#todo-form").submit(function(){
+    let title = $("input[name=title]").val();
+    $.ajax({
+    method: "POST",
+    url: "/api/todos/add",
+    data: {title: title},
+    dataType: "json"
+    })
+    .done(function(data) {
+      addTable(data)
+      $("input[name=title]").val("");
+    });
+    return false;
+  })
+
+  function addTable(data){
+    let html = ""
+    html += `<tr>`
+    html += `<td>${data.id}</td>`
+    html += `<td>${data.title}</td>`
+    html += `<td>${data.completed}</td>`
+    html += `</tr>`
+    $("#todos-table tbody").append(html)
+  }
+</script>
